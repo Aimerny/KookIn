@@ -28,6 +28,7 @@ bind_help_msg = \
 =======  Bind  ========
 """
 
+
 def command_parse(event: Event):
     content = event.content
     channel_id = event.channel_id
@@ -44,6 +45,9 @@ def register(server: PluginServerInterface):
     server.register_command(
         Literal("!!kk").then(GreedyText("message").runs(send_message))
     )
+    server.register_command(
+        Literal("!!kkchans").then(GreedyText("searchKey").runs(search_chans)).runs(get_all_chans)
+    )
 
 
 def send_message(server, ctx):
@@ -51,3 +55,11 @@ def send_message(server, ctx):
     message = f'<{player}>{ctx["message"]}'
     util.send_to_sync_channel(message)
     util.send_to_public_channel(message)
+
+
+def get_all_chans(server, ctx):
+    pass
+
+
+def search_chans(server, ctx):
+    pass
