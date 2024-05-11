@@ -1,6 +1,6 @@
 # KookIn
 
-使用KookAPI实现的MCDR服务器管理插件
+使用[KookAPI](https://github.com/Aimerny/KookAPI)实现的MCDR服务器管理插件
 
 > 该插件的功能移植自[QQ Chat](https://github.com/AnzhiZhang/MCDReforgedPlugins/tree/master/src/qq_chat)插件
 

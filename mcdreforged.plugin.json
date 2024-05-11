@@ -1,6 +1,6 @@
 {
   "id": "kookin",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "name": "Kook In",
   "description": {
     "en_us": "A MCDR kook useful plugin",
@@ -9,7 +9,7 @@
   "author": "Aimerny",
   "link": "https://github.com/Aimerny/Kookin",
   "dependencies":{
-    "kook_api": "^1.0.0",
+    "kook_api": "^0.1.0",
     "online_player_api": "^1.0.0"
   }
 }
