@@ -1,15 +1,16 @@
 from mcdreforged.plugin.server_interface import PluginServerInterface
 
 from kook_api import KookApi
-from kookin.config import Config,Data
+from kookin.config import Config, Data
 from kook_api.event import Event
 from kookin.command import single_handler, bind_handler
 from kookin.util import get_global, send_to_sync_channel, get_all_sync_chat_channel_ids
 from kookin.constant import GlobalKey
 
-config:Config
-data:Data
-kook_api:KookApi
+config: Config
+data: Data
+kook_api: KookApi
+
 
 def init():
     global config, data, kook_api
@@ -17,11 +18,12 @@ def init():
     data = get_global(GlobalKey.data)
     kook_api = get_global(GlobalKey.kookApi)
 
-    #init handlers
+    # init handlers
     bind_handler.init(config, data, kook_api)
     single_handler.init(config, data, kook_api)
 
-def on_message(server: PluginServerInterface, raw_content:str, event:Event):
+
+def on_message(server: PluginServerInterface, raw_content: str, event: Event):
     content = event.content.strip()
     if not content.startswith('/'):
 

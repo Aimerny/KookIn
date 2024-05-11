@@ -15,7 +15,8 @@ def init(config_, data_, kook_api_):
     data = data_
     kookApi = kook_api_
 
-def handle(server:PluginServerInterface, command: str, event: Event):
+
+def handle(server: PluginServerInterface, command: str, event: Event):
     if command == 'help':
         # todo help
         pass

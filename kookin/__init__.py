@@ -7,17 +7,19 @@ import kookin.util
 import kookin.listener as listener
 from kookin.listener import on_message
 
-from kookin.config import Config,Data
+from kookin.config import Config, Data
 from kookin.constant import DATA_FILE
 
 kookApi: kook_api.KookApi
 config: Config
 data: Data
+
+
 def on_load(server: PluginServerInterface, old_plg):
     global kookApi, config, data
     config = server.load_config_simple(target_class=Config)
     data = server.load_config_simple(
-        file_name=DATA_FILE , target_class=Data
+        file_name=DATA_FILE, target_class=Data
     )
     kookApi = server.get_plugin_instance('kook_api').get_api()
     server.logger.info('Kook api loaded')
@@ -30,6 +32,7 @@ def on_load(server: PluginServerInterface, old_plg):
     server.register_event_listener('kook_api.on_message', on_message)
     # 初始化监听Kook事件模块
     listener.init()
+
 
 def on_server_startup(server: PluginServerInterface):
     util.send_to_all_channel(f'**[{config.server_name}]** is startup')
@@ -49,6 +52,7 @@ def on_user_info(server: PluginServerInterface, info):
             util.send_to_sync_channel(
                 f"<{info.player}>{info.content}"
             )
+
 
 def on_player_joined(server: PluginServerInterface, player: str, info: Info):
     # 玩家加入游戏，发送到主频道+同步频道

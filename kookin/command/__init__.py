@@ -1,4 +1,3 @@
-
 from mcdreforged.command.builder.nodes.arguments import GreedyText
 from mcdreforged.command.builder.nodes.basic import Literal
 from mcdreforged.plugin.server_interface import PluginServerInterface
@@ -10,7 +9,8 @@ from kookin.constant import GlobalKey
 
 config: Config
 
-def command_parse(event:Event):
+
+def command_parse(event: Event):
     content = event.content
     channel_id = event.channel_id
 
@@ -33,6 +33,3 @@ def send_message(server, ctx):
     message = f'<{player}>{ctx["message"]}'
     util.send_to_sync_channel(message)
     util.send_to_public_channel(message)
-
-
-

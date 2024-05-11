@@ -52,7 +52,6 @@ def convert_channel_list_to_ids(channels: List[dict]) -> List[str]:
     return channel_ids
 
 
-
 # === Message Send ===
 def send_to_public_channel(content: str, message_type=MessageType.K_MARKDOWN):
     for channelInfo in config.public_channel:
@@ -82,5 +81,5 @@ def send_to_all_channel(content: str, message_type=MessageType.K_MARKDOWN):
 
 
 # === Config Edit ===
-def save_file(obj: Serializable, file_name:str, server: PluginServerInterface):
+def save_file(obj: Serializable, file_name: str, server: PluginServerInterface):
     server.save_config_simple(obj, file_name)
