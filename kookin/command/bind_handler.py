@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from mcdreforged.plugin.server_interface import PluginServerInterface
@@ -24,7 +25,8 @@ def init(config_, data_, kook_api_):
 def handle(server: PluginServerInterface, command_nodes: List[str], event: Event):
     # 校验是否具备管理权限
     user_id = event.author_id
-    if user_id in config.admins or event.channel_id in get_all_admin_channel_ids():
+    identified_username = event.identified_username
+    if identified_username in config.admins or event.channel_id in get_all_admin_channel_ids():
         # /bind list
         if len(command_nodes) == 2 and command_nodes[1] == 'list':
             # 获取当前用户列表
@@ -59,7 +61,7 @@ def handle(server: PluginServerInterface, command_nodes: List[str], event: Event
             bound_list = data.bound_list
             exist_user = data.find_user_by_id(user_id)
             if exist_user is not None:
-                print(exist_user)
+                server.logger.warning(f"{UserInfo.at(user_id)}已经绑定Id为:{exist_user.player_name}")
                 return kookApi.reply(event, f"{UserInfo.at(user_id)}你已经绑定Id为:{exist_user.player_name}，请联系管理员解绑")
 
             user_info = UserInfo(event.username, user_id, player_name)

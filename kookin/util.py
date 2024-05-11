@@ -7,7 +7,6 @@ from mcdreforged.utils.serializer import Serializable
 from kook_api import KookApi
 from kookin.config import Config, Data
 from kook_api.model.send_message import *
-from kookin.exceptions import *
 from kookin.constant import GlobalKey
 
 config: Config

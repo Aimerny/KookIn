@@ -53,8 +53,8 @@ class Config(Serializable):
     public_channel: List[dict] = [ChannelInfo('服务器成员公共频道', '123456').serialize()]
     # 聊天板同步频道
     sync_chat_channel: List[dict] = [ChannelInfo('服务器聊天同步频道', '23333').serialize()]
-    # 管理员列表(使用user_id，推荐从指令添加，kook并未对用户暴露user_id)
-    admins: List[str] = ['114514']
+    # 管理员列表(使用username#唯一标识号)
+    admins: List[str] = ['home#114514']
     server_name: str = 'Survival'
 
 

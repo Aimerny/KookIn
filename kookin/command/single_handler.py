@@ -3,6 +3,7 @@ from mcdreforged.plugin.server_interface import PluginServerInterface
 from kook_api import KookApi
 from kook_api.event import Event
 from kookin.config import Config, Data
+from kookin.command import help_msg, bind_help_msg
 
 config: Config
 data: Data
@@ -18,11 +19,9 @@ def init(config_, data_, kook_api_):
 
 def handle(server: PluginServerInterface, command: str, event: Event):
     if command == 'help':
-        # todo help
-        pass
+        kookApi.reply(event, help_msg)
     elif command == 'bind':
-        # todo bind help
-        pass
+        kookApi.reply(event, bind_help_msg)
     elif command == 'whitelist':
         # todo whitelist help
         pass

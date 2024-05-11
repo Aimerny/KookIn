@@ -9,6 +9,24 @@ from kookin.constant import GlobalKey
 
 config: Config
 
+help_msg = \
+    f"""\
+======= KookIn =======
+/bind      =>   成员绑定
+/whitelist => 白名单管理
+/list      =>   在线列表
+/help      =>   查询指令
+=======  Help  =======
+"""
+
+bind_help_msg = \
+    f"""\
+======= KookIn ========
+/bind <mc_id> => 绑定MC
+/bind clear @ => 清除指定用户绑定信息
+/bind list    => 已绑定列表
+=======  Bind  ========
+"""
 
 def command_parse(event: Event):
     content = event.content
