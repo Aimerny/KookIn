@@ -46,7 +46,7 @@ def register(server: PluginServerInterface):
         Literal("!!kk").then(GreedyText("message").runs(send_message))
     )
     server.register_command(
-        Literal("!!kkchans").then(GreedyText("searchKey").runs(search_chans)).runs(get_all_chans)
+        Literal("!!kkchans").then(GreedyText("search_key").runs(search_chans)).runs(get_all_chans)
     )
 
 
@@ -57,9 +57,28 @@ def send_message(server, ctx):
     util.send_to_public_channel(message)
 
 
-def get_all_chans(server, ctx):
-    pass
+def get_all_chans(server: PluginServerInterface, ctx):
+    search_chans(server, ctx)
 
 
-def search_chans(server, ctx):
-    pass
+def search_chans(server, ctx: dict):
+    guilds_group = {}
+    res_content = '----- channels list -----\n'
+    search_key = ''
+    if 'search_key' in ctx:
+        search_key = ctx['search_key']
+    channels = util.search_channels(search_key)
+    # server.logger().debug(f"searched channels : {channels}")
+    for channel in channels:
+    #     if channel["guild_id"] in guilds_group.keys():
+    #         guilds_group[channel["guild_id"]] = []
+    #     guilds_group[channel["guild_id"]].append(channel)
+    #
+    # for grouped_channels in guilds_group.values():
+    #     if len(grouped_channels) == 0:
+    #         continue
+    #     res_content += f'---- {grouped_channels[0].guild_name} ----\n'
+    #     for channel in grouped_channels:
+        res_content += f'[{channel["guild_name"]}]=>[{channel["channel_name"]}]=>[{channel["channel_id"]}]\n'
+    res_content += '----------------------'
+    server.reply(res_content)

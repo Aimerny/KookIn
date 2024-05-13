@@ -7,6 +7,7 @@ from mcdreforged.utils.serializer import Serializable
 from kook_api import KookApi
 from kookin.config import Config, Data
 from kook_api.model.send_message import *
+from kook_api.model.channels_info_resp import *
 from kookin.constant import GlobalKey
 
 config: Config
@@ -77,6 +78,11 @@ def send_to_all_channel(content: str, message_type=MessageType.K_MARKDOWN):
     send_to_public_channel(content, message_type)
     send_to_admin_channel(content, message_type)
     send_to_sync_channel(content, message_type)
+
+
+def search_channels(search_key:str) -> List[ChannelInfo]:
+    channels = kookApi.search_channels(search_key)
+    return channels.channels
 
 
 # === Config Edit ===
