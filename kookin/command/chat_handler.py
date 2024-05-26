@@ -1,10 +1,4 @@
-from typing import List
-
-from mcdreforged.plugin.server_interface import PluginServerInterface
-
-from kook_api import KookApi
 from kook_api.event import Event
-from kookin.config import Config, Data, UserInfo
 from kookin.util import *
 
 config: Config
