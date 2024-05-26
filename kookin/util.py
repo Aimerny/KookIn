@@ -9,6 +9,7 @@ from kookin.config import Config, Data
 from kook_api.model.send_message import *
 from kook_api.model.channels_info_resp import *
 from kookin.constant import GlobalKey
+from kookin.color import *
 
 config: Config
 kookApi: KookApi
@@ -80,7 +81,7 @@ def send_to_all_channel(content: str, message_type=MessageType.K_MARKDOWN):
     send_to_sync_channel(content, message_type)
 
 
-def search_channels(search_key:str) -> List[ChannelInfo]:
+def search_channels(search_key: str) -> List[ChannelInfo]:
     channels = kookApi.search_channels(search_key)
     return channels.channels
 
@@ -88,3 +89,11 @@ def search_channels(search_key:str) -> List[ChannelInfo]:
 # === Config Edit ===
 def save_file(obj: Serializable, file_name: str, server: PluginServerInterface):
     server.save_config_simple(obj, file_name)
+
+
+def admin_msg(msg:str) -> str:
+    return format_green() + msg + format_white()
+
+
+def common_msg(msg:str) -> str:
+    return format_gray() + msg + format_white()

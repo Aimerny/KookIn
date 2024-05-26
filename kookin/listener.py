@@ -3,8 +3,8 @@ from mcdreforged.plugin.server_interface import PluginServerInterface
 from kook_api import KookApi
 from kookin.config import Config, Data
 from kook_api.event import Event
-from kookin.command import single_handler, bind_handler
-from kookin.util import get_global, send_to_sync_channel, get_all_sync_chat_channel_ids
+from kookin.command import single_handler, bind_handler, chat_handler
+from kookin.util import get_global, send_to_sync_channel, get_all_sync_chat_channel_ids, admin_msg, common_msg
 from kookin.constant import GlobalKey
 
 config: Config
@@ -21,6 +21,7 @@ def init():
     # init handlers
     bind_handler.init(config, data, kook_api)
     single_handler.init(config, data, kook_api)
+    chat_handler.init(config, data, kook_api)
 
 
 def on_message(server: PluginServerInterface, raw_content: str, event: Event):
@@ -30,7 +31,10 @@ def on_message(server: PluginServerInterface, raw_content: str, event: Event):
         if event.channel_id in get_all_sync_chat_channel_ids():
             exist_user = data.find_user_by_id(event.author_id)
             if exist_user is not None:
-                return server.say(f"§7[Kook][{exist_user['username']}]{raw_content}")
+                if event.identified_username in config.admins:
+                    return server.say(admin_msg(f"[Kook][{exist_user.username}]{raw_content}"))
+                else:
+                    return server.say(common_msg(f"[Kook][{exist_user.username}]{raw_content}"))
             else:
                 return send_to_sync_channel(f"*你尚未绑定Id，请使用/bind <id>绑定*")
         else:
@@ -45,3 +49,5 @@ def on_message(server: PluginServerInterface, raw_content: str, event: Event):
     else:
         if command_nodes[0] == 'bind':
             return bind_handler.handle(server, command_nodes, event)
+        elif command_nodes[0] == 'mc':
+            return chat_handler.handle(server, command_nodes, event)
