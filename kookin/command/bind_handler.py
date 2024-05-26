@@ -46,26 +46,29 @@ def handle(server: PluginServerInterface, command_nodes: List[str], event: Event
                         if exist_user is not None:
                             data.clear_user(exist_user)
                             save_file(data, DATA_FILE, server)
-                            kookApi.reply(event, f"已解除{UserInfo.at(user_id)}的绑定")
+                            kookApi.reply(event, f"已解除{UserInfo.at(target_user_id)}的绑定")
 
                 except InvalidParamException as e:
                     kookApi.reply(event, f"内部错误，错误信息:{e.msg}")
                 except ParseMetException as e:
                     kookApi.reply(event, e.content)
 
-        # 非管理员只能主动绑定
-        # /bind <player_name>
-        if len(command_nodes) == 2:
-            player_name = command_nodes[1]
-            user_id = event.author_id
-            bound_list = data.bound_list
-            exist_user = data.find_user_by_id(user_id)
-            if exist_user is not None:
-                server.logger.warning(f"{UserInfo.at(user_id)}已经绑定Id为:{exist_user.player_name}")
-                return kookApi.reply(event, f"{UserInfo.at(user_id)}你已经绑定Id为:{exist_user.player_name}，请联系管理员解绑")
+    # 非管理员只能主动绑定
+    # /bind <player_name>
+    if len(command_nodes) == 2:
+        if command_nodes[1] == 'list':
+            kookApi.reply(event, f"{UserInfo.at(user_id)}仅管理员可用")
+            return
+        player_name = command_nodes[1]
+        user_id = event.author_id
+        bound_list = data.bound_list
+        exist_user = data.find_user_by_id(user_id)
+        if exist_user is not None:
+            server.logger.warning(f"{UserInfo.at(user_id)}已经绑定Id为:{exist_user.player_name}")
+            return kookApi.reply(event, f"{UserInfo.at(user_id)}你已经绑定Id为:{exist_user.player_name}，请联系管理员解绑")
 
-            user_info = UserInfo(event.username, user_id, player_name)
-            bound_list.append(user_info.serialize())
-            save_file(data, DATA_FILE, server)
-            return kookApi.reply(event, f"已成功绑定Id:{player_name}")
+        user_info = UserInfo(event.username, user_id, player_name)
+        bound_list.append(user_info.serialize())
+        save_file(data, DATA_FILE, server)
+        return kookApi.reply(event, f"已成功绑定Id:{player_name}")
 
