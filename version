@@ -1,0 +1,21 @@
+#!/bin/bash
+
+tag_name=$1
+
+meta_file="mcdreforged.plugin.json"
+
+# Check plugin meta exist
+if [ ! -f "$meta_file" ]; then
+    echo "Error: $meta_file does not exist."
+    exit 1
+fi
+
+if [ tag_name == '' ];then
+  echo "Now version is: [`cat $meta_file | jq .version`]"
+  exit 0
+fi
+
+version=$(echo "$tag_name" | sed 's/^v//')
+
+echo "Updating version in $meta_file to $version"
+jq --arg version_name "$version" '.version = $version_name' "$meta_file" > "${meta_file}.tmp" && mv "${meta_file}.tmp" "$meta_file"
