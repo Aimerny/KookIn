@@ -3,7 +3,7 @@ from mcdreforged.plugin.server_interface import PluginServerInterface
 from kook_api import KookApi
 from kookin.config import Config, Data
 from kook_api.event import Event
-from kookin.command import single_handler, bind_handler, chat_handler
+from kookin.command import single_handler, bind_handler, chat_handler, command_handler, mcdr_command_handler
 from kookin.util import get_global, send_to_sync_channel, get_all_sync_chat_channel_ids, admin_msg, common_msg
 from kookin.constant import GlobalKey
 
@@ -22,6 +22,8 @@ def init():
     bind_handler.init(config, data, kook_api)
     single_handler.init(config, data, kook_api)
     chat_handler.init(config, data, kook_api)
+    command_handler.init(config, data, kook_api)
+    mcdr_command_handler.init(config, data, kook_api)
 
 
 def on_message(server: PluginServerInterface, raw_content: str, event: Event):
@@ -51,3 +53,7 @@ def on_message(server: PluginServerInterface, raw_content: str, event: Event):
             return bind_handler.handle(server, command_nodes, event)
         elif command_nodes[0] == 'mc':
             return chat_handler.handle(server, command_nodes, event)
+        elif command_nodes[0] == 'cmd':
+            return command_handler.handle(server, command_nodes, event)
+        elif command_nodes[0] == 'mcdr':
+            return mcdr_command_handler.handle(server, command_nodes, event)
