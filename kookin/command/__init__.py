@@ -1,6 +1,6 @@
 from mcdreforged.command.builder.nodes.arguments import GreedyText
 from mcdreforged.command.builder.nodes.basic import Literal
-from mcdreforged.plugin.server_interface import PluginServerInterface
+from mcdreforged.api.all import *
 
 import kookin.util as util
 from kook_api.event import Event

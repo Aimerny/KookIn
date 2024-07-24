@@ -1,8 +1,7 @@
 import re
 from typing import List, Any
 
-from mcdreforged.plugin.server_interface import PluginServerInterface
-from mcdreforged.utils.serializer import Serializable
+from mcdreforged.api.all import *
 
 from kook_api import KookApi
 from kookin.config import Config, Data

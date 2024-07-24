@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from mcdreforged.plugin.server_interface import PluginServerInterface
+from mcdreforged.api.all import *
 
 from kook_api.event import Event
 from kookin.config import Config, UserInfo, Data

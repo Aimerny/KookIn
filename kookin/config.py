@@ -1,6 +1,5 @@
 import re
 
-from mcdreforged.utils.serializer import Serializable
 from mcdreforged.api.all import *
 from typing import List
 

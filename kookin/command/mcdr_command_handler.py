@@ -1,5 +1,6 @@
 from kook_api.event import Event
 from kookin.util import *
+from mcdreforged.api.all import *
 
 config: Config
 data: Data

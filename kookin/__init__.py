@@ -1,5 +1,5 @@
 from mcdreforged.info_reactor.info import Info
-from mcdreforged.plugin.server_interface import PluginServerInterface
+from mcdreforged.api.all import *
 
 import kook_api
 import kookin.command
