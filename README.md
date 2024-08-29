@@ -1,3 +1,6 @@
+> [!warning]
+> 本仓库永久停止更新，插件已经被移动到如下仓库进行维护: [MCDRPlugins](https://github.com/Aimerny/MCDRPlugins)
+
 # KookIn
 
 使用[KookAPI](https://github.com/Aimerny/KookAPI)实现的MCDR服务器管理插件
